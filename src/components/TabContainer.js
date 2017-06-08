@@ -23,7 +23,7 @@ class TabComponent extends Component {
 				<button onClick={this.handleClickNumbers}>tal</button>
 				
 			</div>
-			<div className="tabbody">tabs
+			<div className="tabbody">
 				{view}
 			</div>
 		  </div>
