@@ -1,9 +1,5 @@
 import { CHANGE_TAB, ADD_NUMBER, HISTORY } from '../actions/actions.js';
 
-let initialState = {
-	tab: 1
-}
-
 /*function rootReducer(state = initialState, action) {
 	console.log('rootReducer state:', state, action)
 	switch( action.type ) {

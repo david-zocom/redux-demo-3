@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ListView from './ListView';
 import Picture from './Picture';
 import History from './History';
-import {actionChangeTab, actionAddNumber} from '../actions/actions.js';
+import {actionChangeTab, actionAddNumber, actionHistory} from '../actions/actions.js';
 import {connect} from 'react-redux';
 
 class TabComponent extends Component {
@@ -44,23 +44,26 @@ class TabComponent extends Component {
 		);
 	}
 	handleClickAddNumber(e) {
-		this.props.dispatch( actionAddNumber(42) );
+		let action = actionAddNumber(42);
+		this.props.dispatch( action );
+		this.props.dispatch( actionHistory(action) );
 	}
 	handleClickWeather(e) {
-		let action = actionChangeTab(1);
-		this.props.dispatch(action);
+		this.changeTab(1);
 	}
 	handleClickNumbers(e) {
-		let action = actionChangeTab(2);
-		this.props.dispatch(action);
+		this.changeTab(2);
 	}
 	handleClickPicture(e) {
-		let action = actionChangeTab(3);
-		this.props.dispatch(action);
+		this.changeTab(3);
 	}
 	handleClickHistory(e) {
-		let action = actionChangeTab(4);
+		this.changeTab(4);
+	}
+	changeTab(tab) {
+		let action = actionChangeTab(tab);
 		this.props.dispatch(action);
+		this.props.dispatch( actionHistory(action) );
 	}
 }
 
