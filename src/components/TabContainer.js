@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ListView from './ListView';
 import Picture from './Picture';
+import History from './History';
 import {actionChangeTab, actionAddNumber} from '../actions/actions.js';
 import {connect} from 'react-redux';
 
@@ -11,6 +12,7 @@ class TabComponent extends Component {
 		this.handleClickNumbers = this.handleClickNumbers.bind(this);
 		this.handleClickPicture = this.handleClickPicture.bind(this);
 		this.handleClickAddNumber = this.handleClickAddNumber.bind(this)
+		this.handleClickHistory = this.handleClickHistory.bind(this)
 	}
 	render() {
 		let view;
@@ -18,8 +20,10 @@ class TabComponent extends Component {
 			view = <ListView items={['regn', 'sol', 'hagel', 'dimma']} />;
 		} else if( this.props.tab === 2 ) {
 			view = <ListView items={this.props.numbers} />;
-		} else {
+		} else if( this.props.tab === 3 ) {
 			view = <Picture image={this.props.imageUrl} />;
+		} else {
+			view = <History history={this.props.history} />;
 		}
 		return (
 			<div className="App">
@@ -27,6 +31,7 @@ class TabComponent extends Component {
 				<button onClick={this.handleClickWeather}>väder</button>
 				<button onClick={this.handleClickNumbers}>tal</button>
 				<button onClick={this.handleClickPicture}>bild</button>
+				<button onClick={this.handleClickHistory}>historik</button>
 				
 			</div>
 			<div className="tabbody">
@@ -43,7 +48,6 @@ class TabComponent extends Component {
 	}
 	handleClickWeather(e) {
 		let action = actionChangeTab(1);
-		console.log('handleClickWeather', action);
 		this.props.dispatch(action);
 	}
 	handleClickNumbers(e) {
@@ -54,6 +58,10 @@ class TabComponent extends Component {
 		let action = actionChangeTab(3);
 		this.props.dispatch(action);
 	}
+	handleClickHistory(e) {
+		let action = actionChangeTab(4);
+		this.props.dispatch(action);
+	}
 }
 
 function mapStateToProps(state) {
@@ -61,7 +69,8 @@ function mapStateToProps(state) {
 	return {
 		tab: state.tab,
 		imageUrl: state.imageUrl,
-		numbers: state.numbers
+		numbers: state.numbers,
+		history: state.history
 	}
 }
 

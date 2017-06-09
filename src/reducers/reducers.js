@@ -1,4 +1,4 @@
-import { CHANGE_TAB, ADD_NUMBER } from '../actions/actions.js';
+import { CHANGE_TAB, ADD_NUMBER, HISTORY } from '../actions/actions.js';
 
 let initialState = {
 	tab: 1
@@ -42,7 +42,16 @@ function pictureReducer(state = '', action) {
 	return state;
 }
 
-export {tabReducer, numbersReducer, pictureReducer};
+function historyReducer(state = [], action) {
+	switch( action.type ) {
+		case HISTORY:
+			return [...state, action.action];
+		default:
+			return state;
+	}
+}
+
+export {tabReducer, numbersReducer, pictureReducer, historyReducer};
 
 
 
