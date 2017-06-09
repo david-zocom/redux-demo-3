@@ -1,4 +1,4 @@
-import { CHANGE_TAB, ADD_NUMBER, HISTORY } from '../actions/actions.js';
+import { CHANGE_TAB, ADD_NUMBER, HISTORY, FETCH_STARTED, FETCH_SUCCESS, FETCH_FAILURE } from '../actions/actions.js';
 
 /*function rootReducer(state = initialState, action) {
 	console.log('rootReducer state:', state, action)
@@ -47,7 +47,29 @@ function historyReducer(state = [], action) {
 	}
 }
 
-export {tabReducer, numbersReducer, pictureReducer, historyReducer};
+function fetchReducer(state = {status: 0, data: null}, action) {
+	switch( action.type ) {
+		case FETCH_STARTED:
+			return {
+				status: 1,
+				data: null
+			};
+		case FETCH_SUCCESS:
+			return {
+				status: 2,
+				data: action.data
+			};
+		case FETCH_FAILURE:
+			return {
+				status: 3,
+				data: action.error
+			};
+		default:
+			return state;
+	}
+}
+
+export {tabReducer, numbersReducer, pictureReducer, historyReducer, fetchReducer};
 
 
 
